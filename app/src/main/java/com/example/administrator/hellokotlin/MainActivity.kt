@@ -14,6 +14,7 @@ import org.jetbrains.anko.longToast
 import org.jetbrains.anko.toast
 import org.jetbrains.anko.uiThread
 
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -29,8 +30,8 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    private lateinit var message: TextView
-    private lateinit var forecastList: RecyclerView
+//    private lateinit var message: TextView
+//    private lateinit var forecastList: RecyclerView
 
 
     private val items = listOf(
@@ -48,7 +49,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         context=this;
 
-        init()
+//        init()
         initListenter()
         initData()
 
@@ -63,12 +64,15 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initData() {
+        Log.d("yfing.wei","initData....")
 
 
         forecastList.layoutManager=LinearLayoutManager(context)
 
         async() {
+            Log.d("yfing.wei","async()...")
             val result=RequestForecastCommand("94043").execute()
+            Log.d("yfing.wei","result:"+result)
             uiThread {
                 //origin code
 //                forecastList.adapter = ForecastListAdapter(result)
@@ -91,17 +95,15 @@ class MainActivity : AppCompatActivity() {
 
         }
 
-//        forecastList.adapter=ForecastListAdapter(items)
     }
 
     private fun initListenter() {
 
     }
 
-    private fun init(){
-        message=findViewById(R.id.message) as TextView
-        forecastList=findViewById(R.id.forecast_list) as RecyclerView
-
-
-    }
+//    private fun init(){
+//        message=findViewById(R.id.message) as TextView
+//        forecastList=findViewById(R.id.forecastList) as RecyclerView
+//
+//    }
 }
